@@ -94,7 +94,7 @@
 
 - **4.1.3.1.** Le niveau de difficulté doit être intégré lors de la génération.
 
-- **4.1.3.2.** Le niveau de difficulté doit contenir trois modes : `Facile`, `Intermédiare` et `Avancé`.
+- **4.1.3.2.** Le niveau de difficulté doit contenir trois modes : `Facile`, `Intermédiaire` et `Avancé`.
 
 - **4.1.3.3.** Le niveau de difficulté par défaut doit être `Facile`.
 
