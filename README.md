@@ -190,6 +190,8 @@
 
 - Par exemple, la **Génération du jeu** vaut **6** points sur 20. Votre remise finale respecte la moitié des requis. Ainsi, votre facteur de modulation est de **0,5** (**5**/10), vous donnant la note finale de **3** points sur 20 pour cette fonctionnalité.
 
+- Les fonctionnalités bonies réussies et complètes valent chacune un surplus de **10 %** à votre note (**2 points** sur 20), avec le même facteur de modulation associé aux fonctionnalités (sur **10**). Les points en surplus ne peuvent pas être appliqués à un travail pratique ou projet antécédents. 
+
 | Fonctionnalités       | Points |
 | --------------------- | ------ |
 | Génération du jeu     | 6      |
