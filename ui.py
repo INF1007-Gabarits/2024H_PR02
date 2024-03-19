@@ -3,19 +3,6 @@ import pygame.freetype
 from pygame.locals import *
 from assets.constants.constants import Constants
 
-# Define additional constants for UI
-BUTTON_SPACING = 20  # Space between buttons
-BUTTON_MARGIN = 20  # Margin on the right side
-BUTTON_WIDTH = 60  # New width for smaller buttons
-BUTTON_HEIGHT = 30
-
-# Define the initial selected cell
-selected_cell = None
-
-# Define a grid dictionary to store cell values
-grid_values = {}
-
-
 pygame.mixer.init()
 pygame.init()
 
@@ -30,7 +17,6 @@ screen = pygame.display.set_mode(
 
 
 def draw_button(screen, image_path, position, title, max_size=(100, 100), font_size=24):
-    # Load and scale the button image
     button = pygame.image.load(image_path)
     original_size = button.get_size()
     aspect_ratio = original_size[0] / original_size[1]
@@ -45,16 +31,13 @@ def draw_button(screen, image_path, position, title, max_size=(100, 100), font_s
 
     button = pygame.transform.scale(button, (new_width, new_height))
 
-    # Blit the scaled image
     screen.blit(button, position)
 
-    # Render the button's title
-    font = pygame.font.Font(None, font_size)  # None for default font
-    text_surf = font.render(title, True, (0, 0, 0))  # Black text
+    font = pygame.font.Font(None, font_size)
+    text_surf = font.render(title, True, (0, 0, 0))
     text_rect = text_surf.get_rect(
         center=(position[0] + new_width // 2, position[1] - new_height // 4))
 
-    # Blit the text onto the screen
     screen.blit(text_surf, text_rect)
 
     return button.get_rect(topleft=position)
@@ -164,71 +147,57 @@ def draw_sudoku_screen():
         (600, 275), "Nouvelle partie", max_size=(100, 100)
     )
 
-    # Draw difficulty buttons
     difficulty_button_rects = draw_difficulty_buttons(
         screen, 520, 400)
 
     draw_sudoku_grid(screen)
-    draw_numbers_with_fading(screen)
+
+    # TODO: 4.3. Affichage d'un chiffre à l'écran au sein d'une case
+    # draw_numbers(screen)
 
     return refresh_button_rect, hint_button_rect, difficulty_button_rects
 
 
 def draw_difficulty_buttons(screen, start_x, start_y):
-    # Define colors for the difficulty levels
-    colors = [(0, 255, 0), (255, 255, 0), (255, 100, 0)]  # Green, Yellow, Red
+    colors = [(0, 255, 0), (255, 255, 0), (255, 100, 0)]
     titles = ["Facile", "Intermédiaire", "Avancé"]
     rects = []
 
     x = start_x
     for i, (title, color) in enumerate(zip(titles, colors)):
-        # Draw each button with its title and color
         rect = draw_colored_button(
             screen, (x, start_y), title, color, padding=(10, 5))
         rects.append(rect)
-        # Increment x for the next button, taking into account the width of the button just drawn and spacing
-        x += rect.width + BUTTON_SPACING
+        x += rect.width + Constants.BUTTON_SPACING
 
     return rects
 
 
 def draw_colored_button(screen, position, title, color, padding=(10, 5)):
-    # Render the button's title
-    font = pygame.font.Font(None, 20)  # Adjust font size as needed
-    # Black text for visibility
+    font = pygame.font.Font(None, 20)
     text_surf = font.render(title, True, (0, 0, 0))
     text_size = text_surf.get_size()
 
-    # Calculate the size of the button with padding
     button_width = text_size[0] + 2 * padding[0]
     button_height = text_size[1] + 2 * padding[1]
     button_size = (button_width, button_height)
 
-    # Create a rectangle
     button_rect = pygame.Rect(position, button_size)
-    # Fill the rectangle with the specified color
     pygame.draw.rect(screen, color, button_rect)
 
-    # Get the center of the new rect for positioning the text
     text_rect = text_surf.get_rect(center=button_rect.center)
 
-    # Blit the text onto the screen
     screen.blit(text_surf, text_rect)
 
     return button_rect
 
 
-def draw_numbers_with_fading(screen):
-    font = pygame.freetype.SysFont("Arial", 24)
-    for position, value in grid_values.items():
-        alpha = value['alpha']
-        if alpha < 255:
-            value['alpha'] += 5  # Increase alpha for fading effect
-            alpha = min(255, alpha)  # Ensure alpha does not exceed 255
+def draw_numbers(screen):
+    """
+    TODO: 4.3. Affichage d'un chiffre à l'écran au sein d'une case
+    """
 
-        text_surface, _ = font.render(str(value['number']), (0, 0, 0))
-        text_surface.set_alpha(alpha)
-        screen.blit(text_surface, position)
+    pass
 
 
 def main():
@@ -239,7 +208,6 @@ def main():
     while running:
         mouse_pos = pygame.mouse.get_pos()
 
-        # Change cursor to hand if over any button
         over_any_button = any(rect.collidepoint(mouse_pos) for rect in difficulty_button_rects) or refresh_button_rect.collidepoint(
             mouse_pos) or hint_button_rect.collidepoint(mouse_pos)
         pygame.mouse.set_cursor(
@@ -249,31 +217,36 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == MOUSEBUTTONDOWN:
-                # Refresh button
+                # TODO 4.3. Réinitialisation du jeu
                 if refresh_button_rect.collidepoint(event.pos):
-                    print("Refresh button clicked")
-                # Hint button
+                    print("Refresh button clicked")  # À retirer...
+                    # TODO
+                # TODO 4.3. Indices
                 elif hint_button_rect.collidepoint(event.pos):
                     print("Hint button clicked")
                 # Difficulty buttons
                 else:
                     for i, rect in enumerate(difficulty_button_rects):
                         if rect.collidepoint(event.pos):
-                            # Identify which difficulty button was clicked
+                            # TODO 4.3. Difficultés
                             if i == 0:
+                                # À retirer...
                                 print("Easy difficulty selected")
+                                # TODO
                             elif i == 1:
+                                # À retirer...
                                 print("Intermediate difficulty selected")
+                                # TODO
                             elif i == 2:
+                                # À retirer...
                                 print("Hard difficulty selected")
+                                # TODO
                             break
             elif event.type == KEYDOWN:
-                if event.unicode in '123456789':
-                    # Sample action on key press
-                    grid_values[(Constants.SCREEN_WIDTH // 2, Constants.SCREEN_HEIGHT // 2)] = {
-                        'number': event.unicode,
-                        'alpha': 0
-                    }
+                # TODO 4.3. Insertion d'une case à la suite de l'appui du clavier (0-9)
+                if event.unicode in '0123456789':
+                    # TODO
+                    pass
 
         if not running:
             break

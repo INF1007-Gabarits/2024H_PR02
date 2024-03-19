@@ -1,7 +1,6 @@
 __name__ = "constants"
-__author__ = "CDL & <votre nom>"
+__author__ = "<votre nom>"
 __version__ = 1.0
-__license__ = "MIT"
 
 
 """
@@ -18,8 +17,9 @@ class Constants:
     MIN_VALUE: int = 1
     SCREEN_WIDTH: int = 800
     SCREEN_HEIGHT: int = 600
-    BUTTON_WIDTH: int = 100
-    BUTTON_HEIGHT: int = 50
+    BUTTON_SPACING: int = 20
+    BUTTON_WIDTH: int = 60
+    BUTTON_HEIGHT: int = 30
     GAME_TITLE: str = "Sudoku"
     SPLASH_SCREEN_BACKGROUND: str = ASSETS_IMAGES + 'splash-bg.jpg'
     SUDOKU_SCREEN_BACKGROUND: str = ASSETS_IMAGES + 'sudoku-bg.jpg'
@@ -29,3 +29,4 @@ class Constants:
     FAVICON: str = ASSETS_IMAGES + 'favicon.png'
     MUSIC_PATH: str = ASSETS_SOUNDS + 'music.mp3'
     DEFAULT_VOLUME: float = 0.3
+    # TODO: Ajouter d'autres constantes utiles pour le projet.
