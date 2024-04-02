@@ -6,6 +6,8 @@
 
 ## Table des matières
 
+- [Table des matières](#table-des-matières)
+- [⏰ Date de remise : le dimanche 21 avril 23h59.](#-date-de-remise--le-dimanche-21-avril-23h59)
 - [1. Introduction](#1-introduction)
 - [2. Objectifs](#2-objectifs)
 - [3. Modules](#3-modules)
@@ -14,7 +16,7 @@
   - [4.2. Tests unitaires](#42-tests-unitaires)
   - [4.3. L'interface graphique](#43-linterface-graphique)
   - [4.4. Journalisation](#44-journalisation)
-  - [4.5. Métriques de journalisation](#45-métriques-de-journalisation)
+  - [4.5. Métriques de journalisation (Bonus)](#45-métriques-de-journalisation-bonus)
 - [5. Remise](#5-remise)
 - [6. Barème](#6-barème)
 
@@ -22,7 +24,7 @@
 
 ## 1. Introduction
 
-- Le [**Sudoku**](https://fr.wikipedia.org/wiki/Sudoku) est un puzzle logique basé sur une grille de 9x9, avec l'objectif de remplir chaque ligne, colonne et sous-grille 3x3 avec les chiffres de 1 à 9 sans répétitions. 
+- Le [**Sudoku**](https://fr.wikipedia.org/wiki/Sudoku) est un puzzle logique basé sur une grille de 9x9, avec l'objectif de remplir chaque ligne, colonne et sous-grille 3x3 avec les chiffres de 1 à 9 sans répétitions.
 
 - La création de votre jeu Sudoku impliquera l'utilisation de la programmation orientée objet pour structurer le jeu, l'interface graphique via [**pygame**](https://www.pygame.org/docs/) pour l'interaction utilisateur et le module [**logging**](https://docs.python.org/3/library/logging.html) pour la journalisation des événements et des erreurs. Enfin, toute partie reliée à la logique propre du jeu (et non de l'interface usager) devra être testée à l'aide de [**unittest**](https://docs.python.org/3/library/unittest.html).
 
@@ -50,9 +52,9 @@
 
 - Si vous souhaitez ajouter une autre librairie non native à Python, veuillez le préciser ici :
 
-| Librairie(s) additionnelle(s)        |
-| ------------------------------------ |
-| **<...>**              |
+| Librairie(s) additionnelle(s) |
+| ----------------------------- |
+| **<...>**                     |
 
 ## 4. Le jeu
 
@@ -67,11 +69,20 @@
 #### Vous devez respecter les requis suivants :
 
 **4.1.1.** Générer un plateau de jeu Sudoku vide.
-- **4.1.1.1.** Il n'y a pas de restriction au niveau des constantes initiales injectées au sein du tableau dit *vide* de contenu.
+
+- **4.1.1.1.** Il n'y a pas de restriction au niveau des constantes initiales injectées au sein du tableau dit _vide_ de contenu.
 
 - **4.1.1.2.** Une seule instance du plateau devrait être référée en tout temps à travers votre implémentation (Singleton).
 
-**4.1.2.** Implémenter un algorithme de complétion automatique dudit plateau, en partant d'un tableau vide ou prérempli). Untel algorithme devrait être développé en programmation dynamique (*backtracking*). Vous pouvez vous référer aux tutoriels suivants (n'oubliez pas de citer vos références au sein de votre code !) :
+**4.1.2.** Génération d'une solution complète et valide
+
+Afin de pouvoir créer un jeu valide et intéressant, il est nécessaire de générer un plateau de jeu offrant une solution unique et complète. Cette solution sera utilisée dans la section _4.1.3_ afin de créer un puzzle reflétant le niveau de difficulté choisit par l'utilisateur en lui retirant un certain nombre de cases.
+
+Pour créer une solution unique et valide, on vous recommande fortement l'utilisation d'un algorithme de _backtracking_. L'algorithme de _backtracking_ est une technique de résolution de problèmes récursifs qui consiste à essayer de construire une solution en testant toutes les possibilités, en revenant en arrière dès qu'une solution partielle ne peut pas être complétée pour aboutir à une solution complète.
+
+- **4.1.2.1.** L'algorithme développé doit être référencé adéquatement. Essayez de ne pas réinventer la roue en suivant l'un des tutoriels suivants:
+
+Voici une liste de ressources qui pourraient vous aider à implémenter un algorithme de _backtracking_ pour résoudre un Sudoku :
 
 - [Algorithm to Solve Sudoku | Sudoku Solver](https://www.geeksforgeeks.org/sudoku-backtracking-7/)
 - [Sudoku-Backtracking algorithm and visualization](https://medium.com/analytics-vidhya/sudoku-backtracking-algorithm-and-visualization-75adec8e860c)
@@ -84,13 +95,9 @@
 - [Sudoku Solver with Python : a methodical approach for algorithm optimization [part 1]](https://medium.com/@ev.zafeiratos/sudoku-solver-with-python-a-methodical-approach-for-algorithm-optimization-part-1-b2c99887167f)
 - [Solve a Sudoku Puzzle Using Backtracking in Python](https://python.plainenglish.io/solve-a-sudoku-puzzle-using-backtracking-in-python-8e9eb58e57e6)
 
-- **4.1.2.1.** L'algorithme doit être développé en programmation dynamique.
+- **4.1.2.2.** La performance de l'algorithme implémenté n'est pas un critère d'évaluation. Cependant, le temps d'exécution de l'algorithme ne doit pas détériorer l'expérience utilisateur.
 
-- **4.1.2.2.** L'algorithme développé doit être référencé adéquatement. Essayez de ne pas réinventer la roue en suivant l'un des tutoriels mentionnés ci-haut.
-
-- **4.1.2.3.** La complexité algorithmique n'est pas restreinte au niveau spatial ni temporel. Néanmoins, le temps et la complexité de votre approche ne devraient pas impacter l'expérience utilisateur.
-
-**4.1.3.** Générer un plateau de jeu Sudoku de départ pour l'utilisateur. 
+**4.1.3.** Générer un plateau de jeu Sudoku de départ selon le niveau de difficulté choisi par l'utilisateur.
 
 - **4.1.3.1.** Le niveau de difficulté doit être intégré lors de la génération.
 
@@ -100,9 +107,9 @@
 
 - **4.1.3.4.** Le changement du niveau de difficulté à travers l'interface utilisateur doit réinitialiser le jeu au complet et appliquer le niveau de difficulté sélectionné.
 
-- **4.1.3.5.** Les niveaux de difficulté dictent le nombre de cases déjà remplies au moment de l'affichage du plateau Sudoku au départ. Pour le mode **`Avancé`**, seul le nombre minimal de cases préremplies sont affichées comme point de départ au joueur (**il ne devrait exister qu'une seule case [ou le nombre minimal de cases] à découvrir qui contient un seul `Indice` [ou le nombre minimal d'indices]**). Pour le mode **`Intermédiaire`**, quelques cases supplémentaires (**d'une (1) à cinq (5) excédentaires**) sont ajoutées en haut du mode `Avancé` pour aider le joueur à débuter la partie. Pour le mode **`Facile`**, **six (6) à dix (10) cases supplémentaires sont remplies d'emblée**. Pensez à introduire le module [**`random`**](https://docs.python.org/3/library/random.html) pour la sélection exacte du nombre de cases préremplies à afficher.
+- **4.1.3.5.** Les niveaux de difficulté dictent le nombre de cases déjà remplies au moment de l'affichage du plateau Sudoku au départ. Pour le niveau `Facile`, conservez entre **40 et 49 cases** pré-remplies afin d'offrir une expérience de jeu accessible aux débutants, avec suffisamment de chiffres pour compléter le puzzle sans trop de difficultés. Pour le niveau `Intermédiaire`, conservez entre **_30 et 39 cases_**, proposant ainsi un défi modéré qui équilibre bien entre facilité et complexité. Pour le niveau `Avancé`, seules **20 à 29 cases** seront pré-remplies, mettant à l'épreuve les compétences des joueurs expérimentés. Pensez à introduire le module [**`random`**](https://docs.python.org/3/library/random.html) pour la sélection exacte du nombre de cases préremplies à afficher.
 
-- **4.1.3.6.** Pour une case donnée, implémentez un algorithme de recherche d'**`Indices`**. Un **`Indice`** représente tout simplement **une possibilité valide parmi les valeurs que peut posséder une case du plateau de jeu**, selon l'état actuel dudit plateau. Lorsque l'utilisateur sélectionne une case vide du plateau au sein de la vue du jeu, et clique ensuite sur le bouton **`Indices`**, **toutes les indices sont affichées élégamment dans le terminal au niveau de la case sélectionnée sur le plateau du jeu.** 
+- **4.1.3.6.** Le jeu doit être capable de générer la liste des **`Indices`** pour la case sélectionnée par l'utilisateur lorsqu'il clique sur le bouton **`Indices`**. Voir la section **4.3.1.** pour la séléction de la case. La liste des indices d'une case donnée est la liste de tous les chiffres possibles pour la case, en tenant compte des contraintes actuelles du tableau: les chiffres déjà présents dans la ligne, la colonne et le carré de 3x3 auquel la case appartient. Les indices doivent être affichés dans le terminal.
 
 > **Fonctionnalité bonie 1** : vous pouvez afficher tous les indices à même une case sélectionnée du plateau du jeu (**au sein de l'interface en plus du terminal**) à la suite d'un clic sur le bouton `Indices`.
 
@@ -114,11 +121,11 @@
 
 - **4.2.1.** Toute fonctionnalité développée qui a trait à la logique de génération et de déroulement de partie doit être testée.
 
-- **4.2.2.** Aucune méthode reliée à la vue de [**pygame**](https://www.pygame.org/docs/), ni de votre module de journalisation (*logging*), ni de votre visualisation des métriques à produire, ne doit être testée.
+- **4.2.2.** Aucune méthode reliée à la vue de [**pygame**](https://www.pygame.org/docs/), ni de votre module de journalisation (_logging_), ni de votre visualisation des métriques à produire, ne doit être testée.
 
 - **4.2.3.** La librairie à utiliser pour vos tests est [**unittest**](https://docs.python.org/3/library/unittest.html).
 
-- **4.2.4.** Deux tests doivent être effectués par méthode cible : un premier test de cas d'utilisation *normal* et un second test de cas d'utilisation *limite*. Vous devez introduire ces deux tests **uniquement** pour toute méthode qui hérite de votre logique de jeu (**`sudoku.py`**).
+- **4.2.4.** Deux tests doivent être effectués par méthode cible : un premier test de cas d'utilisation _normal_ et un second test de cas d'utilisation _limite_. Vous devez introduire ces deux tests **uniquement** pour toute méthode qui hérite de votre logique de jeu (**`sudoku.py`**).
 
 ### 4.3. L'interface graphique
 
@@ -128,7 +135,7 @@
 
 - **4.3.1.** Implémenter le déroulement de partie à travers la visualisation graphique. Une **`Partie`** devrait être scindée en **`Tour`**. Au premier **`Tour`**, le plateau de jeu doit s'initialiser automatiquement avec une difficulté **`Facile`** lorsque le joueur quitte le menu principal vers la vue du jeu (à la suite du clic sur **`Play`**). Un **`Tour`** n'a pas de limite de temps. Lors d'un **`Tour`**, le joueur doit être capable de sélectionner n'importe quelle **case vide** du plateau de jeu. La sélection se fait avec une souris ou par pavé tactile, à la fois pour le déplacement et le clic vers la case d'intérêt. Une case déjà remplie ne doit pas pouvoir être sélectionnée. Une fois une case vide sélectionnée, ladite case doit arborer un style visuel qui permet de la différencier des autres cases vides. Lorsqu'une case devient sélectionnée, la sélection d'une autre case vide sur le plateau désélectionne l'antécédente.
 
-- **4.3.2.** Lorsqu'un utilisateur a sélectionné une case du plateau du jeu, les touches **{0, 1, 2, ..., 9}** du **clavier** doivent être prises en compte. L'appui d'un de ces chiffres alors qu'une case est sélectionnée doit vérifier d'abord la validité du chiffre entré selon l'état actuel du plateau. Un **`Tour`** est complet lorsque le chiffre injecté au sein de la case est **valide**. Le chiffre est alors placé sur le plateau du jeu et un nouveau tour commence. Il sera impossible de sélectionner cette même case au prochain tour (étant maintenant remplie). Sinon, l'utilisateur épuise sa banque de **`Chances`** (une **`Chance`** par essai infructueux), définie préalablement à **3**, toutes difficultés confondues. Lorsque toutes les **`Chances`** de l'utilisateur sont utilisées (**le compteur atteint 0 à la suite d'un dernier placement invalide**), le jeu s'arrête. La mise à jour des **`Chances`** restantes à l'utilisateur est communiquée à travers le terminal (sauf pour le cas de la **Fonctionnalité bonie 2**, voir ci-bas). Il n'est alors possible que de réinitialiser la partie à travers le bouton **`Nouvelle partie`**. La réinitialisation de la partie réinitialise également la banque de **`Chances`** de l'utilisateur. Au niveau de l'affichage des **`Chances`**, tout comme les **`Indices`**, 
+- **4.3.2.** Lorsqu'un utilisateur a sélectionné une case du plateau du jeu, les touches **{0, 1, 2, ..., 9}** du **clavier** doivent être prises en compte. L'appui d'un de ces chiffres alors qu'une case est sélectionnée doit vérifier d'abord la validité du chiffre entré selon l'état actuel du plateau. Un **`Tour`** est complet lorsque le chiffre injecté au sein de la case est **valide**. Le chiffre est alors placé sur le plateau du jeu et un nouveau tour commence. Il sera impossible de sélectionner cette même case au prochain tour (étant maintenant remplie). Sinon, l'utilisateur épuise sa banque de **`Chances`** (une **`Chance`** par essai infructueux), définie préalablement à **3**, toutes difficultés confondues. Lorsque toutes les **`Chances`** de l'utilisateur sont utilisées (**le compteur atteint 0 à la suite d'un dernier placement invalide**), le jeu s'arrête. La mise à jour des **`Chances`** restantes à l'utilisateur est communiquée à travers le terminal (sauf pour le cas de la **Fonctionnalité bonie 2**, voir ci-bas). Il n'est alors possible que de réinitialiser la partie à travers le bouton **`Nouvelle partie`**. La réinitialisation de la partie réinitialise également la banque de **`Chances`** de l'utilisateur. Il faut donc aussi retirer de l'affichage les **`Chances`** et les **`Indices`** ayant été affichés au cours de la partie (si vous avez implémenté les fonctionnalités bonus).
 
 > **Fonctionnalité bonie 2** : vous pouvez afficher les chances restantes **au sein de l'interface graphique** au fur et à mesure du déroulement de partie. **Dans tous les cas, les chances doivent être communiquées au sein du terminal également**.
 
@@ -160,9 +167,9 @@
 
 - **4.4.5.** La journalisation complète d'une partie (contenant l'entièreté de vos temps relatifs, sévérités et messages) doit être généré en format **textuel** (en format **`.log`**) à la fin d'un jeu, nommé **`Rapport de journalisation N`**, **`N`** étant un simple entier qui permet de différencier les rapports de journalisation générés. Ce même format sera utilisé pour générer votre graphique de **sévérité** à travers le **temps** pour un jeu donné.
 
-- **4.4.6.** Tous vos **`Rapports de journalisation`** doivent se trouver au sein d'un dossier **`logs`**. Une journalisation passée ne devrait jamais être altérée par une exécution *a posteriori*.
+- **4.4.6.** Tous vos **`Rapports de journalisation`** doivent se trouver au sein d'un dossier **`logs`**. Une journalisation passée ne devrait jamais être altérée par une exécution _a posteriori_.
 
-### 4.5. Métriques de journalisation
+### 4.5. Métriques de journalisation (Bonus)
 
 > **Fichiers d'intérêt :** **`metrics.py`** qui intéragit avec le dossier **`logs`**, produits de **`logger.py`**. D'autres interfaces et classes peuvent être bien entendu introduites.
 
@@ -186,17 +193,19 @@
 
 - L'évaluation de ce projet est basé sur 5 critères, soient la **génération du jeu**, les **tests unitaires**, l'**interface graphique**, la **journalisation** et l'affichage des métriques de sévérité de journalisation au fil du temps à l'aide d'un **graphique**.
 
-- Pour chacune de ces fonctionnalités, une note d'exhaustivité et d'accomplissement sur **10** sera donnée pour moduler les pondérations. 
+- Pour chacune de ces fonctionnalités, une note d'exhaustivité et d'accomplissement sur **10** sera donnée pour moduler les pondérations.
 
 - Par exemple, la **Génération du jeu** vaut **6** points sur 20. Votre remise finale respecte la moitié des requis. Ainsi, votre facteur de modulation est de **0,5** (**5**/10), vous donnant la note finale de **3** points sur 20 pour cette fonctionnalité.
 
-- Les fonctionnalités bonies réussies et complètes valent chacune un surplus de **10 %** à votre note (**2 points** sur 20), avec le même facteur de modulation associé aux fonctionnalités (sur **10**). Les points en surplus ne peuvent pas être appliqués à un travail pratique ou projet antécédents. 
+- Les fonctionnalités bonies réussies et complètes valent chacune un surplus de **10 %** à votre note (**2 points** sur 20), avec le même facteur de modulation associé aux fonctionnalités (sur **10**). Les points en surplus ne peuvent pas être appliqués à un travail pratique ou projet antécédents.
 
-| Fonctionnalités       | Points |
-| --------------------- | ------ |
-| Génération du jeu     | 6      |
-| Tests unitaires       | 4      |
-| Interface graphique   | 5      |
-| Journalisation        | 3      |
-| Graphique             | 2      |
-| **Total**             | **20** |
+| Fonctionnalités           | Points |
+| ------------------------- | ------ |
+| Génération du jeu         | 6      |
+| Tests unitaires           | 5      |
+| Interface graphique       | 5      |
+| Journalisation            | 4      |
+| Affichage indices (bonus) | +2     |
+| Affichage chances (bonus) | +2     |
+| Métriques (bonus)         | +2     |
+| **Total**                 | **20** |
